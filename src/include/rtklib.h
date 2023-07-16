@@ -56,6 +56,15 @@ extern "C" {
 #endif
 
 /* constants -----------------------------------------------------------------*/
+#define ENAGLO
+
+#define ENAGAL
+
+#define ENACMP
+
+#define ENAQZS
+
+#define ENAIRN
 
 #define VER_RTKLIB  "2.4.3"             /* library version */
 

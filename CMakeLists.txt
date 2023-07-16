@@ -1,23 +1,27 @@
 cmake_minimum_required(VERSION 3.22)
 project(explore_rtklib C)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 
 # enable trace in rtklib
 add_definitions(-DTRACE)
 
 # 导入rtklib相关的库与源文件
-include_directories(BEFORE src/include)
+include_directories(src/include)
 
 file(GLOB SRC_FILES "src/*.c" "src/rcv/*.c")
 
 # 编译源代码生成库文件
 add_library(RTK_LIB ${SRC_FILES})
-# 将库文件连接到libblas\liblapack\libz库上,这几个库都是数学计算库
-target_link_libraries(RTK_LIB blas lapack z)
+# 将库文件连接到libblas\liblapack,这几个库都是数学计算库，libz库是解压用的
+# windows电脑上没有安装，blas/lapack需要自己手动编译并安装
+# target_link_libraries(RTK_LIB blas lapack z)
+
+# 解决undefined reference to `__imp_timeGetTime`的问题
+target_link_libraries(RTK_LIB winmm)
 
 # 设置rtklib编译输出的库文件存储到指定目录
-set_target_properties(RTK_LIB PROPERTIES RCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(RTK_LIB PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 # 将运行时生成的可执行文件输出到指定目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
