@@ -17,7 +17,7 @@ add_library(RTK_LIB ${SRC_FILES})
 target_link_libraries(RTK_LIB blas lapack z)
 
 # 设置rtklib编译输出的库文件存储到指定目录
-set_target_properties(RTK_LIB PROPERTIES RCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(RTK_LIB PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 # 将运行时生成的可执行文件输出到指定目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
