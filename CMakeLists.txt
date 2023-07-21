@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
-project(explore_rtklib C)
+project(explore_rtklib C CXX)
 
-set(CMAKE_C_STANDARD 99)
+# set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 11)
 
 # enable trace in rtklib
 add_definitions(-DTRACE)
