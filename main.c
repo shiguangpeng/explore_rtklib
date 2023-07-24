@@ -44,7 +44,7 @@ int main(void) {
     }
 
     /* 读文件操作 */
-    const char *path = "F:\\work\\gpsposition\\explore_rtklib\\data\\NRMG00NCLN.rnx";
+    const char *path = "F:\\work\\gpsposition\\explore_rtklib\\data\\*.rnx";
 
     gtime_t starttime = {.time=202307190000, .sec=0.0};
     gtime_t endtime = {.time=202307190200, .sec=0.0};
@@ -54,7 +54,7 @@ int main(void) {
     if (status) {
         logMessage(INFO, strerror(errno));
     } else {
-        logMessage(ERRORS, strerror(errno));
+        logMessage(INFO, strerror(errno));
         return -1;
     }
 
