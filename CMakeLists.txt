@@ -10,7 +10,7 @@ add_definitions(-DTRACE)
 # 导入rtklib相关的库与源文件
 include_directories(src/include)
 
-file(GLOB SRC_FILES "src/*.c" "src/rcv/*.c")
+file(GLOB SRC_FILES "src/*.c" "src/rcv/*.c" "src/utils/*.c")
 
 # 编译源代码生成库文件
 add_library(RTK_LIB ${SRC_FILES})
