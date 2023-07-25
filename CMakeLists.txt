@@ -30,7 +30,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 # 告诉cmake项目存在子目录
 add_subdirectory(src)
 
-add_executable(explore_rtklib main.c)
+add_executable(explore_rtklib main.cpp)
 
 # 将本程序连接到rtklib编译生成的静态/动态库
 target_link_libraries(explore_rtklib RTK_LIB)
