@@ -116,6 +116,7 @@ static void dumpnav(nav_t *nav) {
 }
 
 static void dumpsta(sta_t *sta) {
+    printf("******************** station info below ********************\n");
     printf("name    = %s\n", sta->name);
     printf("marker  = %s\n", sta->marker);
     printf("antdes  = %s\n", sta->antdes);
@@ -133,6 +134,10 @@ static void dumpsta(sta_t *sta) {
 
 int main(int argc, char **argv) {
 
+    char traceflie[] = "F:\\work\\gpsposition\\explore_rtklib\\trace.txt";
+
+    traceopen(traceflie);
+
     char file1[] = "F:\\work\\gpsposition\\explore_rtklib\\data\\NRMG00NCLN.rnx";
     char file2[] = "F:\\work\\gpsposition\\explore_rtklib\\data\\NRMG00NCLO.rnx";
 
@@ -140,15 +145,16 @@ int main(int argc, char **argv) {
     nav_t nav = {0};
     sta_t sta = {""};
 
-    printf("readin rinex file: %s\n", file1);
-    printf("================================");
+    printf("read rinex file %s\n", file1);
+    printf("======================================");
 
     gtime_t ts = {.time=1689724800, .sec=0.0}, te = {.time=1689732000, .sec=0.0};
-    readrnxt(file1, 1, ts, te, 0.0, "", NULL, &nav, NULL);
+    readrnxt(file1, 1, ts, te, 0.0, "-SYS=G", NULL, &nav, NULL);
     dumpnav(&nav);
 
     gtime_t t0 = {.time=1689724800, .sec=0.0}, t1 = {.time=1689732000, .sec=0.0};
-    readrnxt(file2, 1, t0, t1, 1800, "", &obs, NULL, &sta);
+    // 由于obervation data file中是30s一个epoch，数据太多了，直接按照半个小时进行采样，两小时就是4个epoch
+    readrnxt(file2, 1, t0, t1, 1800, "-SYS=G", &obs, NULL, &sta);
     dumpobs(&obs);
     dumpsta(&sta);
 
@@ -171,5 +177,8 @@ int main(int argc, char **argv) {
     }
 
     free(obs.data);
+
+    traceclose();
+
     return 0;
 }

@@ -251,7 +251,7 @@ static int rescode(int iter, const obsd_t *obs, int n, const double *rs,
     gtime_t time;
     double r,freq,dion,dtrp,vmeas,vion,vtrp,rr[3],pos[3],dtr,e[3],P;
     int i,j,nv=0,sat,sys,mask[NX-3]={0};
-    
+
     trace(3,"resprng : n=%d\n",n);
     
     for (i=0;i<3;i++) rr[i]=x[i];
@@ -374,10 +374,10 @@ static int estpos(const obsd_t *obs, int n, const double *rs, const double *dts,
     int i,j,k,info,stat,nv,ns;
     
     trace(3,"estpos  : n=%d\n",n);
-    
+    // 伪距观测矩阵的观测值矩阵
     v=mat(n+4,1); H=mat(NX,n+4); var=mat(n+4,1);
     
-    for (i=0;i<3;i++) x[i]=sol->rr[i];
+    for (i=0;i<3;i++) x[i]=sol->rr[i];  // position/velocity (m|m/s)
     
     for (i=0;i<MAXITR;i++) {
         
@@ -623,7 +623,7 @@ extern int pntpos(const obsd_t *obs, int n, const nav_t *nav,
     }
     sol->time=obs[0].time;
     msg[0]='\0';
-    
+    // 6个参数分别是位置x,y,z以及3个分量上的速度
     rs=mat(6,n); dts=mat(2,n); var=mat(1,n); azel_=zeros(2,n); resp=mat(1,n);
     
     if (opt_.mode!=PMODE_SINGLE) { /* for precise positioning */

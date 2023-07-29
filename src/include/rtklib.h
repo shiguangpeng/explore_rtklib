@@ -554,7 +554,7 @@ typedef struct {        /* observation data record */
 } obsd_t;
 
 typedef struct {        /* observation data */
-    int n,nmax;         /* number of obervation data/allocated */
+    int n,nmax;         /* number of observation data/allocated */
     obsd_t *data;       /* observation data records */
 } obs_t;
 
